@@ -18,6 +18,9 @@ export default () => (
   
   <div>
     <Head>
+      <meta charset='utf-8' />
+      <link rel='canonical' href='/' />
+      <meta name='viewport' content='width=device-width,minimum-scale=1' />
       <link rel='stylesheet' type='text/css' href='/static/css/bulma.css' />
       <link rel='stylesheet' type='text/css' href='/static/css/nprogress.css' />
       <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
