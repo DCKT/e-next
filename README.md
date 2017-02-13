@@ -1,2 +1,2 @@
-# next-blog
-Blog running with Next.js (universal app)
+# e-next
+E-commerce Next.js app

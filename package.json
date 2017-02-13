@@ -1,5 +1,5 @@
 {
-  "name": "NextBlog",
+  "name": "e-next",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "next": "^1.1.2"
+    "next": "^2.0.0-beta",
+    "nprogress": "^0.2.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
