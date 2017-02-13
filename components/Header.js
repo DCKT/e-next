@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -5,7 +7,7 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 import { ROUTES } from '../constants/'
 
-Router.onRouteChangeStart = (url) => {
+Router.onRouteChangeStart = (url: string): void => {
   console.log(`Loading: ${url}`)
   NProgress.start()
 }
@@ -49,7 +51,7 @@ export default () => (
 
       <div className='nav-right nav-menu'>
         <a className='nav-item' href={ROUTES.STATICS.FAQ}>
-          Blog
+          FAQ
         </a>
       </div>
     </nav>
