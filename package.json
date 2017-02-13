@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/next -p 4444"
+    "start": "./node_modules/.bin/next -p 4444",
+    "build": "./node_modules/.bin/next build"
   },
   "keywords": [],
   "author": "",
