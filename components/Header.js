@@ -7,10 +7,7 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 import { ROUTES } from '../constants/'
 
-Router.onRouteChangeStart = (url: string): void => {
-  console.log(`Loading: ${url}`)
-  NProgress.start()
-}
+Router.onRouteChangeStart = (url: string): void => NProgress.start()
 Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
 
