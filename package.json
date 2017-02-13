@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bulma": "^0.3.1",
     "next": "^2.0.0-beta",
     "nprogress": "^0.2.0",
     "react": "^15.4.2",
