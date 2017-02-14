@@ -2,7 +2,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import * as Moltin from '../utils/js/moltin'
-import Product from '../components/Product'
+import ProductListItem from '../components/ProductListItem'
 import type { TMoltinProduct } from '../utils/js/types'
 
 export default class Home extends React.Component {
@@ -31,6 +31,7 @@ export default class Home extends React.Component {
           <div className='container'>
             <div className='heading'>
               <h1 className='title'>Les derniers produits</h1>
+              <h2 className='subtitle'>A ne pas manquer</h2>
             </div>
             <div className='columns'>
               { this.props.products.map(this._renderProducts) }
@@ -42,7 +43,7 @@ export default class Home extends React.Component {
   }
 
   _renderProducts = (product: TMoltinProduct, i: number): React$Element<*> =>
-    <div className='column is-4'>
-      <Product key={i} data={product} />
+    <div className='column is-3' key={i}>
+      <ProductListItem data={product} />
     </div>
 }
