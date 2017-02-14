@@ -24,9 +24,10 @@ export default (props: Props) => (
       <meta name='viewport' content='width=device-width,minimum-scale=1' />
       <link rel='stylesheet' type='text/css' href='/static/css/bulma.css' />
       <link rel='stylesheet' type='text/css' href='/static/css/nprogress.css' />
-      <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
       <title>{ props.title || 'e-next' }</title>
     </Head>
+
     <Header />
 
     <div className={props.contentClassName}>
