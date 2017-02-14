@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import * as Moltin from '../utils/js/moltin'
 import ProductListItem from '../components/ProductListItem'
 import type { TMoltinProduct } from '../utils/js/types'
+import { StyleSheet, css } from 'aphrodite'
 
 export default class Home extends React.Component {
   static async getInitialProps () {
@@ -29,7 +30,7 @@ export default class Home extends React.Component {
         </section>
         <section className='section'>
           <div className='container'>
-            <div className='heading'>
+            <div className={`heading ${css(styles.section)}`}>
               <h1 className='title'>Les derniers produits</h1>
               <h2 className='subtitle'>A ne pas manquer</h2>
             </div>
@@ -47,3 +48,9 @@ export default class Home extends React.Component {
       <ProductListItem data={product} />
     </div>
 }
+
+const styles = StyleSheet.create({
+  section: {
+    marginBottom: 30
+  }
+})
