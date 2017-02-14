@@ -3,8 +3,15 @@ const moltin = require('moltin')({
   secretKey: process.env.ENEXT_MOLTIN_PRIVATE
 })
 
-export default () => {
+export const authenticate = (cb) =>
   moltin.Authenticate(() => {
     console.info('Moltin authenticated !')
+    cb()
   })
-}
+
+export const fetchProducts = (): Promise<*> =>
+  new Promise((resolve, reject) => {
+    authenticate(() => {
+      moltin.Product.List(null, data => resolve(data), error => reject(error))
+    })
+  })
