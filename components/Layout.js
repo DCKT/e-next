@@ -7,9 +7,9 @@ import Header from './Header'
 import Footer from './Footer'
 
 type Props = {
-  children: React$Element<*>,
+  children?: React$Element<*>,
   title: string,
-  contentClassName: ?string
+  contentClassName?: ?string
 }
 
 Router.onRouteChangeStart = (url: string): void => NProgress.start()
