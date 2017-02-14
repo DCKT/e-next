@@ -1,12 +1,14 @@
+// @flow
 import React from 'react'
 import Layout from '../components/Layout'
 import * as Moltin from '../utils/js/moltin'
+import Product from '../components/Product'
+import type { TMoltinProduct } from '../utils/js/types'
 
 export default class Home extends React.Component {
   static async getInitialProps () {
-    // eslint-disable-next-line no-undef
     const products = await Moltin.fetchProducts()
-    console.log(products)
+    console.log(products[0])
     return { products }
   }
 
@@ -25,10 +27,22 @@ export default class Home extends React.Component {
             </div>
           </div>
         </section>
-        <section>
-
+        <section className='section'>
+          <div className='container'>
+            <div className='heading'>
+              <h1 className='title'>Les derniers produits</h1>
+            </div>
+            <div className='columns'>
+              { this.props.products.map(this._renderProducts) }
+            </div>
+          </div>
         </section>
       </Layout>
     )
   }
+
+  _renderProducts = (product: TMoltinProduct, i: number): React$Element<*> =>
+    <div className='column is-4'>
+      <Product key={i} data={product} />
+    </div>
 }
