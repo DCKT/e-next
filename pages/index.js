@@ -9,7 +9,7 @@ import { StyleSheet, css } from 'aphrodite'
 export default class Home extends React.Component {
   static async getInitialProps () {
     const products = await Moltin.fetchProducts()
-    console.log(products[0])
+
     return { products }
   }
 
