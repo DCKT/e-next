@@ -6,8 +6,14 @@ import ProductListItem from '../components/ProductListItem'
 import type { TMoltinProduct } from '../utils/js/types'
 import { StyleSheet, css } from 'aphrodite'
 
+type Props = {
+  products: Array<TMoltinProduct>
+}
+
 export default class Home extends React.Component {
-  static async getInitialProps () {
+  props: Props
+
+  static async getInitialProps ({ req }) {
     const products = await Moltin.fetchProducts()
 
     return { products }

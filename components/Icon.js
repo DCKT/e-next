@@ -18,7 +18,7 @@ export default (props: Props): React$Element<*> => {
   })
 
   return (
-    <span className='icon'>
+    <span className={className}>
       <i className={`fa fa-${props.name}`} />
     </span>
   )

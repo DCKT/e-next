@@ -1,16 +1,23 @@
 // @flow
 import React from 'react'
+import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import * as Moltin from '../utils/js/moltin'
-import ProductListItem from '../components/ProductListItem'
 import Button from '../components/Button'
+import { addProduct } from '../actions/cart'
 import type { TMoltinProduct, TMoltinImage } from '../utils/js/types'
+
+type Props = {
+  product: TMoltinProduct,
+  dispatch: () => any
+}
 
 type State = {
   currentPicture: TMoltinImage
 }
 
-export default class Home extends React.Component {
+class ProductDetails extends React.Component {
+  props: Props
   state: State
 
   static async getInitialProps ({ query }) {
@@ -63,7 +70,7 @@ export default class Home extends React.Component {
                   { description }
                 </p>
                 <div>
-                  <Button type='primary'>
+                  <Button type='primary' onClick={this._addProduct}>
                     Ajouter au panier
                   </Button>
                 </div>
@@ -76,11 +83,18 @@ export default class Home extends React.Component {
   }
 
   _renderPictures = (picture: TMoltinImage, i: number): React$Element<*> =>
-    <div className='column'>
+    <div className='column' key={i}>
       <img src={picture.url.http} alt={picture.name} onClick={this._changeCurrentPicture(picture)} />
     </div>
 
   _changeCurrentPicture = (picture: TMoltinImage): Function => () => {
     this.setState({ currentPicture: picture })
   }
+
+  _addProduct = (): void => {
+    const { dispatch, product } = this.props
+    dispatch(addProduct(product))
+  }
 }
+
+export default connect()(ProductDetails)

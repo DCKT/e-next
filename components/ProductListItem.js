@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import type { TMoltinProduct, TMoltinImage } from '../utils/js/types'
+import type { TMoltinProduct } from '../utils/js/types'
 
 type Props = {
   data: TMoltinProduct
