@@ -14,7 +14,7 @@ export default (props: Props) => {
 
   return (
     <div className='card'>
-      <Link href={`/product/${slug}?id=${id}`}>
+      <Link href={`/product?id=${id}`} as={`/product/${slug}_${id}`}>
         <a>
           <div className='card-image'>
             <figure className='image is-4by3'>

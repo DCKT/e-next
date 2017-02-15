@@ -19,7 +19,7 @@ Router.onRouteChangeError = () => NProgress.done()
 export default (props: Props) => (
   <div>
     <Head>
-      <title>{ props.title || 'e-next' }</title>
+      <title>{ `${props.title} - e-next` || 'e-next' }</title>
     </Head>
 
     <Header />
