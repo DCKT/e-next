@@ -42,8 +42,6 @@ class Header extends React.Component {
     const navRightClassName = classNames('nav-right nav-menu', {
       'is-active': isMenuVisible
     })
-    
-    const cartButtonClassName = 
 
     return (
       <nav className='nav has-shadow'>
@@ -109,7 +107,7 @@ class Header extends React.Component {
 
 const styles = StyleSheet.create({
   minicartOverlay: {
-    position: 'fixed',
+    position: 'absolute',
     top: '0%',
     right: '0%',
     width: '100%',
