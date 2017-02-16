@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import Button from '../components/Button'
 import { StyleSheet, css } from 'aphrodite'
 import Link from 'next/link'
+import Minicart from './Minicart'
 import type { TMoltinProduct } from '../utils/js/types'
 
 type Props = {
@@ -27,7 +28,7 @@ class Header extends React.Component {
 
     this.state = {
       isMenuVisible: false,
-      isMiniCartVisible: false
+      isMiniCartVisible: true
     }
   }
 
@@ -83,17 +84,12 @@ class Header extends React.Component {
             </Button>
           </a>
         </div>
-
-        {
-          isMiniCartVisible ? (
-            <div>
-              <div className={css(styles.minicartOverlay)} onClick={this._toggleMiniCart} />
-              <div className={css(styles.minicart)}>
-                <h3>My cart</h3>
-              </div>
-            </div>
-          ) : null
-        }
+        <div>
+          <div className={css(styles.minicartOverlay, isMiniCartVisible && styles.minicartOverlayVisible)} onClick={this._toggleMiniCart} />
+          <div className={css(styles.minicart, isMiniCartVisible && styles.minicartVisible)}>
+            <Minicart products={cart.products} />
+          </div>
+        </div>
       </nav>
     )
   }
@@ -110,19 +106,33 @@ class Header extends React.Component {
 const styles = StyleSheet.create({
   minicartOverlay: {
     position: 'fixed',
-    top: 0,
-    left: 0,
+    top: '0%',
+    right: '0%',
+    width: 0,
+    height: '100%',
+    background: 'rgba(24,24,24, .5)',
+    opacity: 0,
+    transition: 'all .5s ease-out'
+  },
+  minicartOverlayVisible: {
     width: '100%',
     height: '100%',
-    background: 'rgba(24,24,24, .5)'
+    opacity: 1,
+    transition: 'all .5s ease-in'
   },
   minicart: {
     position: 'fixed',
-    right: 0,
+    right: '-300px',
     top: 0,
     width: '300px',
     height: '100%',
-    background: 'white'
+    background: 'white',
+    transition: 'all .3s ease-out',
+    boxShadow: '-2px 0px 4px rgba(24,24,24, .1)'
+  },
+  minicartVisible: {
+    right: '0px',
+    transition: 'all .3s ease-in'
   }
 })
 
