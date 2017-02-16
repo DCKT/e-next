@@ -9,8 +9,7 @@ import Footer from './Footer'
 type Props = {
   children?: React$Element<*>,
   title: string,
-  contentClassName?: ?string,
-  isServer: boolean
+  contentClassName?: ?string
 }
 
 Router.onRouteChangeStart = (url: string): void => NProgress.start()
@@ -18,7 +17,7 @@ Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
 
 export default class Layout extends React.Component {
-  props: Props
+  props: Props;
 
   render () {
     const { title, contentClassName, children } = this.props

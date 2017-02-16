@@ -11,7 +11,9 @@ import Minicart from './Minicart'
 import type { TMoltinProduct } from '../utils/js/types'
 
 type Props = {
-  cart: Array<TMoltinProduct>
+  cart: {
+    products: Array<TMoltinProduct>
+  }
 }
 
 type State = {
@@ -20,10 +22,10 @@ type State = {
 }
 
 class Header extends React.Component {
-  props: Props
-  state: State
+  props: Props;
+  state: State;
 
-  constructor (props) {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -81,7 +83,7 @@ class Header extends React.Component {
 
             <div className={navRightClassName}>
               <a className='nav-item is-hidden-mobile' onClick={this._toggleMiniCart}>
-                <Button icons='shopping-cart' className={css(styles.noHover)}>
+                <Button icons='shopping-cart' className={css(!cart.products.length && styles.noHover)}>
                   <span>
                     { cart && cart.products.length }
                   </span>

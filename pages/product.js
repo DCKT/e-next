@@ -7,25 +7,29 @@ import { addProduct } from '../actions/cart'
 import type { TMoltinProduct, TMoltinImage } from '../utils/js/types'
 import { initStore } from '../store'
 import { Provider } from 'react-redux'
+import classNames from 'classnames'
 
 type Props = {
   product: TMoltinProduct,
   dispatch: () => any,
-  isServer: boolean
+  isServer: boolean,
+  initialState: Object
 }
 
 type State = {
-  currentPicture: TMoltinImage
+  currentPicture: TMoltinImage,
+  isLoading: boolean
 }
 
-class ProductDetails extends React.Component {
+export default class ProductDetails extends React.Component {
   props: Props
   state: State
+  store: Object
 
   static async getInitialProps ({ query, req }) {
-    const id = query.id ? query.id : query.slug.split('_')[1]
-    const product = await Moltin.fetchProduct(id)
     const isServer = !!req
+    const id = query.id || query.slug.split('_')[1]
+    const product = await Moltin.fetchProduct(id)
     const store = initStore({}, isServer)
 
     return { product, initialState: store.getState(), isServer }
@@ -35,19 +39,24 @@ class ProductDetails extends React.Component {
     this.setState({ currentPicture: this.props.product.images[0] })
   }
 
-  constructor (props) {
+  constructor (props: Props) {
     super(props)
 
     this.store = initStore(props.initialState, props.isServer)
     this.state = {
-      currentPicture: null
+      currentPicture: null,
+      isLoading: false
     }
   }
 
   render () {
     const { product } = this.props
-    const { currentPicture } = this.state
+    const { currentPicture, isLoading } = this.state
     const { title, description, brand, images } = product
+
+    const addButtonCartClassName = classNames({
+      'is-loading': isLoading
+    })
 
     return product ? (
       <Provider store={this.store}>
@@ -76,7 +85,7 @@ class ProductDetails extends React.Component {
                     { description }
                   </p>
                   <div>
-                    <Button type='primary' onClick={this._addProduct}>
+                    <Button type='primary' onClick={this._addProduct} className={addButtonCartClassName}>
                       Ajouter au panier
                     </Button>
                   </div>
@@ -103,5 +112,3 @@ class ProductDetails extends React.Component {
     this.store.dispatch(addProduct(product))
   }
 }
-
-export default ProductDetails

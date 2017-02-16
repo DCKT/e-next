@@ -9,11 +9,15 @@ import { initStore } from '../store'
 import { Provider } from 'react-redux'
 
 type Props = {
-  products: Array<TMoltinProduct>
+  products: Array<TMoltinProduct>,
+  initialState: Object,
+  isServer: boolean
 }
 
 export default class Home extends React.Component {
   props: Props
+  store: Object
+  _renderProducts: (product: TMoltinProduct, i: number) => React$Element<*>
 
   static async getInitialProps ({ req }) {
     const products = await Moltin.fetchProducts()
@@ -23,7 +27,7 @@ export default class Home extends React.Component {
     return { products, initialState: store.getState(), isServer }
   }
 
-  constructor (props) {
+  constructor (props: Props) {
     super(props)
 
     this.store = initStore(props.initialState, props.isServer)
