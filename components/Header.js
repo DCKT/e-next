@@ -28,7 +28,7 @@ class Header extends React.Component {
 
     this.state = {
       isMenuVisible: false,
-      isMiniCartVisible: true
+      isMiniCartVisible: false
     }
   }
 
@@ -42,6 +42,8 @@ class Header extends React.Component {
     const navRightClassName = classNames('nav-right nav-menu', {
       'is-active': isMenuVisible
     })
+    
+    const cartButtonClassName = 
 
     return (
       <nav className='nav has-shadow'>
@@ -77,7 +79,7 @@ class Header extends React.Component {
             FAQ
           </a>
           <a className='nav-item' onClick={this._toggleMiniCart}>
-            <Button icons='shopping-cart'>
+            <Button icons='shopping-cart' className={css(styles.noHover)}>
               <span>
                 { cart && cart.products.length }
               </span>
@@ -99,7 +101,9 @@ class Header extends React.Component {
   }
 
   _toggleMiniCart = (): void => {
-    this.setState({ isMiniCartVisible: !this.state.isMiniCartVisible })
+    if (this.props.cart.products.length) {
+      this.setState({ isMiniCartVisible: !this.state.isMiniCartVisible })
+    }
   }
 }
 
@@ -108,17 +112,17 @@ const styles = StyleSheet.create({
     position: 'fixed',
     top: '0%',
     right: '0%',
-    width: 0,
+    width: '100%',
     height: '100%',
     background: 'rgba(24,24,24, .5)',
     opacity: 0,
-    transition: 'all .5s ease-out'
+    transition: 'all .3s ease-out',
+    zIndex: -1
   },
   minicartOverlayVisible: {
-    width: '100%',
-    height: '100%',
     opacity: 1,
-    transition: 'all .5s ease-in'
+    transition: 'all .3s ease-in',
+    zIndex: 1
   },
   minicart: {
     position: 'fixed',
@@ -128,11 +132,16 @@ const styles = StyleSheet.create({
     height: '100%',
     background: 'white',
     transition: 'all .3s ease-out',
-    boxShadow: '-2px 0px 4px rgba(24,24,24, .1)'
+    boxShadow: '-2px 0px 4px rgba(24,24,24, .1)',
+    zIndex: 2
   },
   minicartVisible: {
     right: '0px',
     transition: 'all .3s ease-in'
+  },
+  noHover: {
+    cursor: 'default',
+    border: 'none'
   }
 })
 
