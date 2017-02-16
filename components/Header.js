@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import Button from '../components/Button'
 import { StyleSheet, css } from 'aphrodite'
+import Link from 'next/link'
 import type { TMoltinProduct } from '../utils/js/types'
 
 type Props = {
@@ -44,9 +45,11 @@ class Header extends React.Component {
     return (
       <nav className='nav has-shadow'>
         <div className='nav-left'>
-          <a className='nav-item' href={ROUTES.HOME}>
-            <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
-          </a>
+          <Link href={ROUTES.HOME}>
+            <a className='nav-item'>
+              <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
+            </a>
+          </Link>
         </div>
 
         <div className='nav-center'>

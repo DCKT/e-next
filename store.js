@@ -14,15 +14,15 @@ const reducer = combineReducers({
 
 export const initStore = (initialState, isServer) => {
   if (isServer && !isBrowser) {
-    return createStore(reducer, composeEnhancers(applyMiddleware(...middleware)))
+    return createStore(reducer, initialState, composeEnhancers(applyMiddleware(...middleware)))
   } else {
     if (process.env.NODE_ENV !== 'production') {
       middleware.push(createLogger({ collapsed: true }))
     }
 
-    if (!store) {
-      store = createStore(reducer, composeEnhancers(applyMiddleware(...middleware)))
+    if (!window.store) {
+      window.store = createStore(reducer, initialState, composeEnhancers(applyMiddleware(...middleware)))
     }
-    return store
+    return window.store
   }
 }
