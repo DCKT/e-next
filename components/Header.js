@@ -44,53 +44,67 @@ class Header extends React.Component {
     })
 
     return (
-      <nav className='nav has-shadow'>
-        <div className='nav-left'>
-          <Link href={ROUTES.HOME}>
-            <a className='nav-item'>
-              <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
-            </a>
-          </Link>
-        </div>
+      <div>
+        <nav className='nav has-shadow'>
+          <div className='container'>
+            <div className='nav-left'>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-mobile'>
+                  Product lists 1
+                </a>
+              </Link>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-mobile'>
+                  Product lists 2
+                </a>
+              </Link>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-tablet'>
+                  <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
+                </a>
+              </Link>
+            </div>
 
-        <div className='nav-center'>
-          <a className='nav-item'>
-            <span className='icon'>
-              <i className='fa fa-github' />
+            <div className='nav-center'>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-mobile'>
+                  <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
+                </a>
+              </Link>
+            </div>
+
+            <span className={burgerClassName} onClick={this._toggleMenu}>
+              <span />
+              <span />
+              <span />
             </span>
-          </a>
-          <a className='nav-item'>
-            <span className='icon'>
-              <i className='fa fa-twitter' />
-            </span>
-          </a>
-        </div>
 
-        <span className={burgerClassName} onClick={this._toggleMenu}>
-          <span />
-          <span />
-          <span />
-        </span>
-
-        <div className={navRightClassName}>
-          <a className='nav-item' href={ROUTES.STATICS.FAQ}>
-            FAQ
-          </a>
-          <a className='nav-item' onClick={this._toggleMiniCart}>
-            <Button icons='shopping-cart' className={css(styles.noHover)}>
-              <span>
-                { cart && cart.products.length }
-              </span>
-            </Button>
-          </a>
-        </div>
-        <div>
-          <div className={css(styles.minicartOverlay, isMiniCartVisible && styles.minicartOverlayVisible)} onClick={this._toggleMiniCart} />
-          <div className={css(styles.minicart, isMiniCartVisible && styles.minicartVisible)}>
-            <Minicart products={cart.products} />
+            <div className={navRightClassName}>
+              <a className='nav-item is-hidden-mobile' onClick={this._toggleMiniCart}>
+                <Button icons='shopping-cart' className={css(styles.noHover)}>
+                  <span>
+                    { cart && cart.products.length }
+                  </span>
+                </Button>
+              </a>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-tablet'>
+                  Product lists 1
+                </a>
+              </Link>
+              <Link href={ROUTES.HOME}>
+                <a className='nav-item is-hidden-tablet'>
+                  Product lists 2
+                </a>
+              </Link>
+            </div>
           </div>
+        </nav>
+        <div className={css(styles.minicartOverlay, isMiniCartVisible && styles.minicartOverlayVisible)} onClick={this._toggleMiniCart} />
+        <div className={css(styles.minicart, isMiniCartVisible && styles.minicartVisible)}>
+          <Minicart products={cart.products} />
         </div>
-      </nav>
+      </div>
     )
   }
 
@@ -114,13 +128,12 @@ const styles = StyleSheet.create({
     height: '100%',
     background: 'rgba(24,24,24, .5)',
     opacity: 0,
-    transition: 'all .3s ease-out',
-    zIndex: -1
+    transition: 'all .3s ease-out'
   },
   minicartOverlayVisible: {
     opacity: 1,
     transition: 'all .3s ease-in',
-    zIndex: 1
+    zIndex: 3
   },
   minicart: {
     position: 'fixed',
@@ -131,7 +144,7 @@ const styles = StyleSheet.create({
     background: 'white',
     transition: 'all .3s ease-out',
     boxShadow: '-2px 0px 4px rgba(24,24,24, .1)',
-    zIndex: 2
+    zIndex: 4
   },
   minicartVisible: {
     right: '0px',
