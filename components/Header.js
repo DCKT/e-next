@@ -49,6 +49,12 @@ class Header extends React.Component {
       <div>
         <nav className='nav has-shadow'>
           <div className='container'>
+            <span className={burgerClassName} onClick={this._toggleMenu}>
+              <span />
+              <span />
+              <span />
+            </span>
+
             <div className='nav-left'>
               <Link href={ROUTES.HOME}>
                 <a className='nav-item is-hidden-mobile'>
@@ -73,13 +79,14 @@ class Header extends React.Component {
                   <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
                 </a>
               </Link>
+              <a className='nav-item is-hidden-tablet' onClick={this._toggleMiniCart}>
+                <Button icons='shopping-cart' className={css(!cart.products.length && styles.noHover)}>
+                  <span>
+                    { cart && cart.products.length }
+                  </span>
+                </Button>
+              </a>
             </div>
-
-            <span className={burgerClassName} onClick={this._toggleMenu}>
-              <span />
-              <span />
-              <span />
-            </span>
 
             <div className={navRightClassName}>
               <a className='nav-item is-hidden-mobile' onClick={this._toggleMiniCart}>
