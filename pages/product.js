@@ -38,7 +38,7 @@ class ProductDetails extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.product.id !== this.props.product.id) {
-      this.setState({ currentPicture: this.props.product.images[0] })
+      this.setState({ currentPicture: this.props.product.images[0] }) // eslint-disable-line react/no-did-update-set-state
     }
   }
 
