@@ -36,6 +36,12 @@ class ProductDetails extends React.Component {
     this.setState({ currentPicture: this.props.product.images[0] })
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.product.id !== this.props.product.id) {
+      this.setState({ currentPicture: this.props.product.images[0] })
+    }
+  }
+
   constructor (props: Props) {
     super(props)
 

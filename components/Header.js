@@ -111,14 +111,10 @@ class Header extends React.Component {
         </nav>
         <div className={css(styles.minicartOverlay, isMiniCartVisible && styles.minicartOverlayVisible)} onClick={this._toggleMiniCart} />
         <div className={css(styles.minicart, isMiniCartVisible && styles.minicartVisible)}>
-          { cart && <Minicart cart={cart} /> }
+          { cart && <Minicart cart={cart} closeMinicart={this._toggleMiniCart} /> }
         </div>
       </div>
     )
-  }
-
-  _getCart = (): void => {
-    this.props.dispatch(getCart())
   }
 
   _toggleMenu = (): void => {

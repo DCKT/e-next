@@ -3,10 +3,12 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import Button from './Button'
+import Link from 'next/link'
 import type { TMoltinCart } from '../utils/js/types'
 
 type Props = {
-  cart: TMoltinCart
+  cart: TMoltinCart,
+  closeMinicart: () => void
 }
 
 export default class MiniCart extends React.Component {
@@ -36,12 +38,18 @@ export default class MiniCart extends React.Component {
   }
 
   _renderCartProduct = (product: Object, i: number): React$Element<*> => (
-    <div key={i} className={`columns ${css(styles.product)}`}>
+    <div key={i} className={`columns is-mobile ${css(styles.product)}`}>
       <div className={`column is-3 ${css(styles.productPicture)}`}>
         <img src={product.images[0].url.http} alt={product.images[0].name} />
       </div>
       <div className={`column is-9 ${css(styles.productDetail)}`}>
-        <strong>{ product.title }</strong>
+        <span onClick={this.props.closeMinicart}>
+          <Link href={`/product?id=${product.id}`} as={`/product/${product.slug}_${product.id}`}>
+            <a>
+              <strong>{ product.title }</strong>
+            </a>
+          </Link>
+        </span>
         <p>
           Quantity : { product.quantity }
         </p>
@@ -84,6 +92,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     flexDirection: 'column',
-    padding: '10px 0px'
+    padding: '10px 0px',
+    overflow: 'scroll'
   }
 })
