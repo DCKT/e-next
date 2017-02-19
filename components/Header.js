@@ -8,12 +8,12 @@ import Button from '../components/Button'
 import { StyleSheet, css } from 'aphrodite'
 import Link from 'next/link'
 import Minicart from './Minicart'
-import type { TMoltinProduct } from '../utils/js/types'
+import type { TMoltinCart } from '../utils/js/types'
+import { getCart } from '../actions/cart'
 
 type Props = {
-  cart: {
-    products: Array<TMoltinProduct>
-  }
+  cart: TMoltinCart,
+  dispatch: Function
 }
 
 type State = {
@@ -80,9 +80,9 @@ class Header extends React.Component {
                 </a>
               </Link>
               <a className='nav-item is-hidden-tablet' onClick={this._toggleMiniCart}>
-                <Button icons='shopping-cart' className={css(!cart.products.length && styles.noHover)}>
+                <Button icons='shopping-cart' className={css(!cart && styles.noHover)}>
                   <span>
-                    { cart && cart.products.length }
+                    { cart && cart.total_items }
                   </span>
                 </Button>
               </a>
@@ -90,9 +90,9 @@ class Header extends React.Component {
 
             <div className={navRightClassName}>
               <a className='nav-item is-hidden-mobile' onClick={this._toggleMiniCart}>
-                <Button icons='shopping-cart' className={css(!cart.products.length && styles.noHover)}>
+                <Button icons='shopping-cart' className={css(!cart && styles.noHover)}>
                   <span>
-                    { cart && cart.products.length }
+                    { cart && cart.total_items }
                   </span>
                 </Button>
               </a>
@@ -111,10 +111,14 @@ class Header extends React.Component {
         </nav>
         <div className={css(styles.minicartOverlay, isMiniCartVisible && styles.minicartOverlayVisible)} onClick={this._toggleMiniCart} />
         <div className={css(styles.minicart, isMiniCartVisible && styles.minicartVisible)}>
-          <Minicart products={cart.products} />
+          { cart && <Minicart cart={cart} /> }
         </div>
       </div>
     )
+  }
+
+  _getCart = (): void => {
+    this.props.dispatch(getCart())
   }
 
   _toggleMenu = (): void => {
@@ -122,7 +126,7 @@ class Header extends React.Component {
   }
 
   _toggleMiniCart = (): void => {
-    if (this.props.cart.products.length) {
+    if (this.props.cart) {
       this.setState({ isMiniCartVisible: !this.state.isMiniCartVisible })
     }
   }
@@ -165,6 +169,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ cart }) => ({ cart })
+const mapStateToProps = ({ cart }) => ({
+  cart: cart.instance
+})
 
 export default connect(mapStateToProps)(Header)

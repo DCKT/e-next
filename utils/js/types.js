@@ -20,24 +20,18 @@ export type TMoltinBrand = {
   }
 }
 
+export type TMoltinPriceTax = {
+  with_tax: string,
+  without_tax: string,
+  tax: string
+}
+
 export type TMoltinPrice = {
   value: string,
   data: {
-    formatted: {
-      with_tax: string,
-      without_tax: string,
-      tax: string
-    },
-    rounded: {
-      with_tax: string,
-      without_tax: string,
-      tax: string
-    },
-    raw: {
-      with_tax: string,
-      without_tax: string,
-      tax: string
-    }
+    formatted: TMoltinPriceTax,
+    rounded: TMoltinPriceTax,
+    raw: TMoltinPriceTax
   }
 }
 
@@ -99,6 +93,44 @@ export type TMoltinProduct = {
     value: string,
     data: TMoltinBrand
   },
-  price: TMoltinPrice
+  price: TMoltinPrice,
   images: Array<TMoltinImage>
+}
+
+export type TMoltinCart = {
+  contents: {
+    [key: string]: {
+      id: string,
+      quantity: number,
+      limit: number,
+      offset: number,
+      order: ?any,
+      ...TMoltinProduct
+    }
+  }
+  discount_code: ?string,
+  total_items: number,
+  total_items_unique: number,
+  totals: {
+    pre_discount: {
+      formatted: TMoltinPriceTax,
+      rounded: TMoltinPriceTax,
+      raw: TMoltinPriceTax
+    },
+    post_discount: {
+      formatted: TMoltinPriceTax,
+      rounded: TMoltinPriceTax,
+      raw: TMoltinPriceTax
+    }
+  },
+  currency: {
+    id: string,
+    code: string,
+    format: string,
+    decimal: string,
+    thousand: string,
+    rounding: ?any,
+    exchange: number,
+    default: boolean
+  }
 }

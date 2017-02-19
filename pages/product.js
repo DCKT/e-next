@@ -5,9 +5,8 @@ import * as Moltin from '../utils/js/moltin'
 import Button from '../components/Button'
 import { addProduct } from '../actions/cart'
 import type { TMoltinProduct, TMoltinImage } from '../utils/js/types'
-import { initStore } from '../store'
-import { Provider } from 'react-redux'
 import classNames from 'classnames'
+import providerConnect from '../components/_Provider'
 
 type Props = {
   product: TMoltinProduct,
@@ -21,18 +20,16 @@ type State = {
   isLoading: boolean
 }
 
-export default class ProductDetails extends React.Component {
+class ProductDetails extends React.Component {
   props: Props
   state: State
   store: Object
 
   static async getInitialProps ({ query, req }) {
-    const isServer = !!req
     const id = query.id || query.slug.split('_')[1]
     const product = await Moltin.fetchProduct(id)
-    const store = initStore({}, isServer)
 
-    return { product, initialState: store.getState(), isServer }
+    return { product }
   }
 
   componentDidMount () {
@@ -42,7 +39,6 @@ export default class ProductDetails extends React.Component {
   constructor (props: Props) {
     super(props)
 
-    this.store = initStore(props.initialState, props.isServer)
     this.state = {
       currentPicture: null,
       isLoading: false
@@ -59,42 +55,40 @@ export default class ProductDetails extends React.Component {
     })
 
     return product ? (
-      <Provider store={this.store}>
-        <Layout title={title}>
-          <div className='container'>
-            <div className='columns'>
-              <div className='column is-half'>
-                <div>
-                  {
-                    currentPicture ? <img src={currentPicture.url.http} alt={currentPicture.name} /> : null
-                  }
-                </div>
-                <div className='columns'>
-                  {
-                    images.map(this._renderPictures)
-                  }
-                </div>
+      <Layout title={title}>
+        <div className='container'>
+          <div className='columns'>
+            <div className='column is-half'>
+              <div>
+                {
+                  currentPicture ? <img src={currentPicture.url.http} alt={currentPicture.name} /> : null
+                }
               </div>
-              <div className='column is-half'>
-                <section className='section'>
-                  <div className='heading'>
-                    <h1 className='title'>{ title }</h1>
-                    <h2 className='subtitle'>{ brand.value }</h2>
-                  </div>
-                  <p className='content'>
-                    { description }
-                  </p>
-                  <div>
-                    <Button type='primary' onClick={this._addProduct} className={addButtonCartClassName}>
-                      Ajouter au panier
-                    </Button>
-                  </div>
-                </section>
+              <div className='columns'>
+                {
+                  images.map(this._renderPictures)
+                }
               </div>
             </div>
+            <div className='column is-half'>
+              <section className='section'>
+                <div className='heading'>
+                  <h1 className='title'>{ title }</h1>
+                  <h2 className='subtitle'>{ brand.value }</h2>
+                </div>
+                <p className='content'>
+                  { description }
+                </p>
+                <div>
+                  <Button type='primary' onClick={this._addProduct} className={addButtonCartClassName}>
+                    Ajouter au panier
+                  </Button>
+                </div>
+              </section>
+            </div>
           </div>
-        </Layout>
-      </Provider>
+        </div>
+      </Layout>
     ) : null
   }
 
@@ -109,6 +103,8 @@ export default class ProductDetails extends React.Component {
 
   _addProduct = (): void => {
     const { product } = this.props
-    this.store.dispatch(addProduct(product))
+    this.props.dispatch(addProduct(product))
   }
 }
+
+export default providerConnect()(ProductDetails)
