@@ -134,19 +134,19 @@ class Header extends React.Component {
 
 const styles = StyleSheet.create({
   minicartOverlay: {
-    position: 'absolute',
+    position: 'fixed',
     top: '0%',
     right: '0%',
-    width: '100%',
-    height: '100%',
     background: 'rgba(24,24,24, .5)',
     opacity: 0,
-    transition: 'all .3s ease-out'
+    transition: 'all .3s ease-out',
+    zIndex: 3
   },
   minicartOverlayVisible: {
     opacity: 1,
     transition: 'all .3s ease-in',
-    zIndex: 3
+    width: '100%',
+    height: '100%'
   },
   minicart: {
     position: 'fixed',

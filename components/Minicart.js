@@ -79,5 +79,11 @@ const styles = StyleSheet.create({
   },
   productDetail: {
     textAlign: 'left'
+  },
+  listContainer: {
+    display: 'flex',
+    height: '100%',
+    flexDirection: 'column',
+    padding: '10px 0px'
   }
 })
