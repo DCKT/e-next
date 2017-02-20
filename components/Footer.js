@@ -5,17 +5,43 @@ import React from 'react'
 export default (): React$Element<*> => (
   <footer className='footer'>
     <div className='container'>
-      <div className='content has-text-centered'>
-        <p>
-          <strong>Bulma</strong> by <a href='http://jgthms.com'>Jeremy Thomas</a>. The source code is licensed
-          <a href='http://opensource.org/licenses/mit-license.php'>MIT</a>. The website content
-          is licensed <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>CC ANS 4.0</a>.
-        </p>
-        <p>
-          <a className='icon' href='https://github.com/jgthms/bulma'>
-            <i className='fa fa-github' />
-          </a>
-        </p>
+      <div className='columns'>
+        <div className='column'>
+          <h3>ENEXT</h3>
+          <ul>
+            <li>
+              <a>Figure</a>
+            </li>
+          </ul>
+        </div>
+        <div className='column'>
+          <h3>Licenses</h3>
+          <ul>
+            <li>
+              <a>License 1</a>
+            </li>
+            <li>
+              <a>License 2</a>
+            </li>
+            <li>
+              <a>License 3</a>
+            </li>
+          </ul>
+        </div>
+        <div className='column'>
+          <h3>Informations</h3>
+          <ul>
+            <li>
+              <a>Info 1</a>
+            </li>
+            <li>
+              <a>Info 2</a>
+            </li>
+            <li>
+              <a>Info 3</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
